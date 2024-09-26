@@ -1,0 +1,23 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{% static producto.imagen_url %}" alt="{{ producto.nombre }}" class="img-thumbnail mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+                <a href="{% url 'producto_descripcion' producto.id %}" class="btn btn-primary">Ver más</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No hay productos disponibles en este momento.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+{% block title %}Usuario{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Perfil del Usuario</h1>
+    <img src="{% static datos_usuario.imagen_url %}" alt="Imagen del usuario" class="img-thumbnail" width="150">
+    <p><strong>Nombre:</strong> {{ datos_usuario.nombre }}</p>
+    <p><strong>Email:</strong> {{ datos_usuario.email }}</p>
+    <p><strong>Teléfono:</strong> {{ datos_usuario.telefono }}</p>
+    <p><strong>Biografía:</strong> {{ datos_usuario.biografia }}</p>
+</div>
+{% endblock %}
