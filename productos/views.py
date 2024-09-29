@@ -1,24 +1,42 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+import os
+from django.conf import settings
 
 
 # Vista del índice
 def index(request):
     return render(request, 'productos/index.html')
 
-# Vista para el usuario/identificación
-from django.shortcuts import render
-
 def usuario(request):
+    # Definir los datos del usuario
     datos_usuario = {
         'nombre': 'Emanuel Gutierrez',
         'email': 'emanuel.gutierrez@gmail.com',
         'telefono': '954755903',
-        'imagen_url': 'productos/img/persona.png',
+        'imagen_url': '/static/productos/img/persona.png',
         'biografia': 'Encargado de la Super Tienda.'
     }
-    return render(request, 'productos/usuario.html', {'datos_usuario': datos_usuario})
+
+    # Ruta al archivo HTML del usuario
+    html_file_path = os.path.join(settings.BASE_DIR, 'productos/templates/productos/usuario.html')
+
+    # Leer el contenido del archivo HTML
+    try:
+        with open(html_file_path, 'r') as file:
+            html_content = file.read()
+    except FileNotFoundError:
+        return HttpResponse("<h1>Archivo no encontrado</h1>", status=404)
+
+    # Insertar los datos dinámicos en el contenido HTML
+    html_content = html_content.replace('{{ datos_usuario.nombre }}', datos_usuario['nombre'])
+    html_content = html_content.replace('{{ datos_usuario.email }}', datos_usuario['email'])
+    html_content = html_content.replace('{{ datos_usuario.telefono }}', datos_usuario['telefono'])
+    html_content = html_content.replace('{{ datos_usuario.imagen_url }}', datos_usuario['imagen_url'])
+    html_content = html_content.replace('{{ datos_usuario.biografia }}', datos_usuario['biografia'])
+
+    # Devolver el contenido HTML modificado como respuesta
+    return HttpResponse(html_content)
 
 # Vista para la lista de productos
 def productos(request):
