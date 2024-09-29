@@ -3,10 +3,11 @@
 {% block title %}Descripción del Producto{% endblock %}
 
 {% block content %}
-<div class="text-center">
+<div class="container text-center mt-5">
     <h1>{{ producto.nombre }}</h1>
     <img src="{% static producto.imagen_url %}" alt="{{ producto.nombre }}" class="img-thumbnail mb-3">
     <p>{{ producto.descripcion }}</p>
     <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+    <a href="{% url 'productos' %}" class="btn btn-secondary mt-3">Volver a la Lista de Productos</a>
 </div>
 {% endblock %}

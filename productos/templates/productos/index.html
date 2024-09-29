@@ -1,10 +1,16 @@
 {% extends 'productos/base.html' %}
+{% load static %} 
 {% block title %}Página Principal{% endblock %}
 
 {% block content %}
 <div class="text-center">
-    <h1>Bienvenido a Rincones del Clima</h1>
-    <p>Explora nuestros productos y usuarios</p>
+    <h1>Bienvenido a Super Tienda</h1>
+    <p>Explora nuestros productos de confianza a un super precio</p>
+    
+    <div class="mb-3"> 
+        <img src="{% static 'productos/img/super.png' %}" alt="Bienvenida a Super Tienda" class="img-fluid" style="width: 50%;">  <!-- Ajustar a 50% -->
+    </div>
+
     <a href="{% url 'productos' %}" class="btn btn-primary">Ver Productos</a>
     <a href="{% url 'usuario' %}" class="btn btn-secondary">Ver Usuario</a>
 </div>
